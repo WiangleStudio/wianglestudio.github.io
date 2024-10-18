@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiangle工作室介绍</title>
+    <style>
+        :root {
+            --primary-color: #04007e;
+            --secondary-color: #2c3e50;
+            --text-color: #333;
+            --light-text-color: #ffffff;
+            --background-overlay: rgba(0, 0, 0, 0.7);
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .overlay {
+            background-color: var(--background-overlay);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        header {
+            background-color: var(--light-text-color);
+            padding: 1rem;
+            text-align: center;
+        }
+        .logo {
+            width: 150px;
+            height: auto;
+            filter: drop-shadow(0 0 10px var(--primary-color));
+        }
+        .language-switch {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0600b3;
+        }
+        h2 {
+            color: var(--light-text-color);
+            margin: 0 0 20px 0;
+        }
+        .content {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .link-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .link-btn:hover {
+            background-color: #0600b3;
+        }
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        .fade-in {
+            opacity: 1;
+            transition: opacity 0.5s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <header>
+            <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="logo">
+        </header>
+        <div class="container">
+            <div class="language-switch">
+                <button class="btn" onclick="toggleLanguage()">切换语言 / Switch Language</button>
+            </div>
+            <div class="content">
+                <div id="description">
+                    <p>Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。</p>
+                    <p>我们的主要项目包括：</p>
+                    <ul>
+                        <li>Wiangle Minecraft Launcher - 功能强大的Minecraft启动器</li>
+                        <li>Minecraft模组开发</li>
+                        <li>Minecraft服务器插件开发</li>
+                        <li>各类Minecraft工具</li>
+                    </ul>
+                    <p>我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。</p>
+                    <p>此网站由Wiangle工作室开发</p>
+                    <p>如要留言请联系Wiangle工作室的邮箱：</p>
+                    <ul>
+                        <li>wiangle_studio@outlook.com</li>
+                    </ul>
+                </div>
+                <a href="wiangleMinecraftLauncher.html" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isEnglish = false;
+
+        function toggleLanguage() {
+            const description = document.getElementById('description');
+            const launcherLink = document.getElementById('launcher-link');
+            
+            description.classList.add('fade-out');
+            launcherLink.classList.add('fade-out');
+            
+            setTimeout(() => {
+                isEnglish = !isEnglish;
+                updateContent();
+                
+                description.classList.remove('fade-out');
+                description.classList.add('fade-in');
+                launcherLink.classList.remove('fade-out');
+                launcherLink.classList.add('fade-in');
+                
+                setTimeout(() => {
+                    description.classList.remove('fade-in');
+                    launcherLink.classList.remove('fade-in');
+                }, 500);
+            }, 500);
+        }
+
+        function updateContent() {
+            const description = document.getElementById('description');
+            const launcherLink = document.getElementById('launcher-link');
+
+            if (isEnglish) {
+                description.innerHTML = `
+                    <p>Wiangle Studio is a passionate and creative software development team focused on providing high-quality gaming experiences for Minecraft players.</p>
+                    <p>Our main projects include:</p>
+                    <ul>
+                        <li>Wiangle Minecraft Launcher - A powerful Minecraft launcher</li>
+                        <li>Minecraft mod development</li>
+                        <li>Minecraft server plugin development</li>
+                        <li>Various Minecraft tools</li>
+                    </ul>
+                    <p>Our team consists of experienced developers, designers, and Minecraft enthusiasts dedicated to contributing to the Minecraft community.</p>
+                    <p>This website is developed by Wiangle Studio</p>
+                    <p>For suggestions, please contact the email of Wiangle Studio:</p>
+                    <ul>
+                        <li>wiangle_studio@outlook.com</li>
+                    </ul>
+                `;
+                launcherLink.textContent = 'View Wiangle Minecraft Launcher';
+            } else {
+                description.innerHTML = `
+                    <p>Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。</p>
+                    <p>我们的主要项目包括：</p>
+                    <ul>
+                        <li>Wiangle Minecraft Launcher - 功能强大的Minecraft启动器</li>
+                        <li>Minecraft模组开发</li>
+                        <li>Minecraft服务器插件开发</li>
+                        <li>各类Minecraft工具</li>
+                    </ul>
+                    <p>我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。</p>
+                    <p>此网站由Wiangle工作室开发</p>
+                    <p>如要留言请联系Wiangle工作室的邮箱：</p>
+                    <ul>
+                        <li>wiangle_studio@outlook.com</li>
+                    </ul>
+                `;
+                launcherLink.textContent = '查看Wiangle Minecraft Launcher';
+            }
+        }
+    </script>
+</body>
+</html>
