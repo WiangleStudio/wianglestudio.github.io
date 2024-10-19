@@ -135,23 +135,21 @@
             <div class="content-container">
                 <div class="content">
                     <div id="description">
-                        <p>Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。</p>
-                        <p>我们的主要项目包括：</p>
+                        <p>Wiangle Minecraft Launcher是一款功能强大，用户友好的Minecraft启动器，为玩家提供最佳的游戏体验。</p>
+                        <p>Wiangle Minecraft Launcher 的主要特点有</p>
                         <ul>
-                            <li>Wiangle Minecraft Launcher - 功能强大的Minecraft启动器</li>
-                            <li>Minecraft模组开发</li>
-                            <li>Minecraft服务器插件开发</li>
-                            <li>各类Minecraft工具</li>
+                            <li>直观易用的界面设计，让您轻松管理游戏版本和模组</li>
+                            <li>支持多个Minecraft版本和模组加载器，满足不同玩家的需求</li>
+                            <li>内置模组管理系统，轻松安装、更新和管理您喜爱的模组</li>
+                            <li>提供游戏性能优化选项，让您的Minecraft运行更加流畅。</li>
                         </ul>
-                        <p>我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。</p>
                         <p>此网站由Wiangle工作室开发</p>
                         <p>如要留言请联系Wiangle工作室的邮箱：</p>
                         <ul>
                             <li>wiangle_studio@outlook.com</li>
-                            <li>wianglestudio@outlook.com</li>
                         </ul>
                     </div>
-                    <a href="WiangleMinecraftLauncher.txt" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
+                    <a href="wiangleMinecraftLauncher.txt" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
                 </div>
             </div>
         </div>
@@ -188,59 +186,57 @@
 
             if (isEnglish) {
                 description.innerHTML = `
-                    <p>Wiangle Studio is a passionate and creative software development team focused on providing high-quality gaming experiences for Minecraft players.</p>
-                    <p>Our main projects include:</p>
+                    <p>Wiangle Minecraft Launcher is a powerful, user-friendly launcher for Minecraft, offering the best gaming experience for players.</p>
+                    <p>The main features of Wiangle Minecraft Launcher include:</p>
                     <ul>
-                        <li>Wiangle Minecraft Launcher - A powerful Minecraft launcher</li>
-                        <li>Minecraft mod development</li>
-                        <li>Minecraft server plugin development</li>
-                        <li>Various Minecraft tools</li>
+                        <li>Intuitive interface design allows you to easily manage game versions and mods</li>
+                        <li>Supports multiple Minecraft versions and mod loaders to meet different player needs</li>
+                        <li>Built-in mod management system for easy installation, updates, and management of your favorite mods </li>
+                        <li>Provides game performance optimization options to make your Minecraft run more smoothly.</li>
                     </ul>
-                    <p>Our team consists of experienced developers, designers, and Minecraft enthusiasts dedicated to contributing to the Minecraft community.</p>
                     <p>This website is developed by Wiangle Studio</p>
                     <p>For suggestions, please contact the email of Wiangle Studio:</p>
                     <ul>
                         <li>wiangle_studio@outlook.com</li>
-                        <li>wianglestudio@outlook.com</li>
                     </ul>
                 `;
                 launcherLink.textContent = 'View Wiangle Minecraft Launcher';
             } else {
                 description.innerHTML = `
-                    <p>Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。</p>
-                    <p>我们的主要项目包括：</p>
+                    <p>Wiangle Minecraft Launcher是一款功能强大，用户友好的Minecraft启动器，为玩家提供最佳的游戏体验。</p>
+                    <p>Wiangle Minecraft Launcher 的主要特点有</p>
                     <ul>
-                        <li>Wiangle Minecraft Launcher - 功能强大的Minecraft启动器</li>
-                        <li>Minecraft模组开发</li>
-                        <li>Minecraft服务器插件开发</li>
-                        <li>各类Minecraft工具</li>
+                        <li>直观易用的界面设计，让您轻松管理游戏版本和模组</li>
+                        <li>支持多个Minecraft版本和模组加载器，满足不同玩家的需求</li>
+                        <li>内置模组管理系统，轻松安装、更新和管理您喜爱的模组</li>
+                        <li>提供游戏性能优化选项，让您的Minecraft运行更加流畅。</li>
                     </ul>
-                    <p>我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。</p>
                     <p>此网站由Wiangle工作室开发</p>
                     <p>如要留言请联系Wiangle工作室的邮箱：</p>
                     <ul>
                         <li>wiangle_studio@outlook.com</li>
-                        <li>wianglestudio@outlook.com</li>
                     </ul>
                 `;
                 launcherLink.textContent = '查看Wiangle Minecraft Launcher';
             }
         }
 
-        // 开场动画
         window.addEventListener('load', function() {
             const introAnimation = document.getElementById('introAnimation');
             const introLogo = document.getElementById('introLogo');
+            if (window.location.href.indexOf('index.html') === -1) {
+                introLogo.style.opacity = '1';
+                introLogo.style.transform = 'scale(1)';
 
-            introLogo.style.opacity = '1';
-            introLogo.style.transform = 'scale(1)';
-
-            setTimeout(() => {
-                introAnimation.style.opacity = '0';
                 setTimeout(() => {
-                    introAnimation.style.display = 'none';
-                }, 500);
-            }, 2000);
+                    introAnimation.style.opacity = '0';
+                    setTimeout(() => {
+                        introAnimation.style.display = 'none';
+                    }, 500);
+                }, 2000);
+            } else {
+                introAnimation.style.display = 'none';
+            }
         });
     </script>
 </body>
