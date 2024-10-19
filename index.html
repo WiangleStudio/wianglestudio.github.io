@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiangle Studio - Wiangle Minecraft Launcher</title>
+    <title>Wiangle Studio</title>
     <style>
         :root {
             --primary-color: #04007e;
@@ -43,6 +43,7 @@
         .logo {
             width: 150px;
             height: auto;
+            filter: drop-shadow(0 0 10px var(--primary-color));
         }
         .language-switch {
             text-align: right;
@@ -60,15 +61,15 @@
         .btn:hover {
             background-color: #0600b3;
         }
-        .content-container {
+        h2 {
+            color: var(--light-text-color);
+            margin: 0 0 20px 0;
+        }
+        .content {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .content {
-            position: relative;
-            z-index: 1;
         }
         ul {
             padding-left: 20px;
@@ -97,9 +98,37 @@
             opacity: 1;
             transition: opacity 0.5s ease-in;
         }
+        .intro-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease-out;
+        }
+        .intro-logo {
+            width: 200px;
+            height: auto;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 1s ease-in, transform 1s ease-in;
+        }
+        .intro-logo.show {
+            opacity: 1;
+            transform: scale(1);
+        }
     </style>
 </head>
 <body>
+    <div class="intro-animation" id="introAnimation">
+        <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="intro-logo" id="introLogo">
+    </div>
+
     <div class="overlay">
         <header>
             <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="logo">
@@ -108,31 +137,31 @@
             <div class="language-switch">
                 <button class="btn" onclick="toggleLanguage()">切换语言 / Switch Language</button>
             </div>
-            <div class="content-container">
-                <div class="content">
-                    <div id="description">
-                        <p>Wiangle Minecraft Launcher是一款功能强大，用户友好的Minecraft启动器，为玩家提供最佳的游戏体验。</p>
-                        <p>Wiangle Minecraft Launcher 的主要特点有</p>
-                        <ul>
-                            <li>直观易用的界面设计，让您轻松管理游戏版本和模组</li>
-                            <li>支持多个Minecraft版本和模组加载器，满足不同玩家的需求</li>
-                            <li>内置模组管理系统，轻松安装、更新和管理您喜爱的模组</li>
-                            <li>提供游戏性能优化选项，让您的Minecraft运行更加流畅。</li>
-                        </ul>
-                        <p>此网站由Wiangle工作室开发</p>
-                        <p>如要留言请联系Wiangle工作室的邮箱：</p>
-                        <ul>
-                            <li>wiangle_studio@outlook.com</li>
-                        </ul>
-                    </div>
-                    <a href="wiangleMinecraftLauncher.txt" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
+            <div class="content">
+                <div id="description">
+                    <p>Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。</p>
+                    <p>我们的主要项目包括：</p>
+                    <ul>
+                        <li>Wiangle Minecraft Launcher - 功能强大的Minecraft启动器</li>
+                        <li>Minecraft模组开发</li>
+                        <li>Minecraft服务器插件开发</li>
+                        <li>各类Minecraft工具</li>
+                    </ul>
+                    <p>我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。</p>
+                    <p>此网站由Wiangle工作室开发</p>
+                    <p>如要留言请联系Wiangle工作室的邮箱：</p>
+                    <ul>
+                        <li>wiangle_studio@outlook.com</li>
+                    </ul>
                 </div>
+                <a href="WiangleMinecraftLauncher.html" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
             </div>
         </div>
     </div>
 
     <script>
         let isEnglish = false;
+
         function toggleLanguage() {
             const description = document.getElementById('description');
             const launcherLink = document.getElementById('launcher-link');
@@ -162,14 +191,15 @@
 
             if (isEnglish) {
                 description.innerHTML = `
-                    <p>Wiangle Minecraft Launcher is a powerful, user-friendly launcher for Minecraft, offering the best gaming experience for players.</p>
-                    <p>The main features of Wiangle Minecraft Launcher include:</p>
+                    <p>Wiangle Studio is a passionate and creative software development team focused on providing high-quality gaming experiences for Minecraft players.</p>
+                    <p>Our main projects include:</p>
                     <ul>
-                        <li>Intuitive interface design allows you to easily manage game versions and mods</li>
-                        <li>Supports multiple Minecraft versions and mod loaders to meet different player needs</li>
-                        <li>Built-in mod management system for easy installation, updates, and management of your favorite mods </li>
-                        <li>Provides game performance optimization options to make your Minecraft run more smoothly.</li>
+                        <li>Wiangle Minecraft Launcher - A powerful Minecraft launcher</li>
+                        <li>Minecraft mod development</li>
+                        <li>Minecraft server plugin development</li>
+                        <li>Various Minecraft tools</li>
                     </ul>
+                    <p>Our team consists of experienced developers, designers, and Minecraft enthusiasts dedicated to contributing to the Minecraft community.</p>
                     <p>This website is developed by Wiangle Studio</p>
                     <p>For suggestions, please contact the email of Wiangle Studio:</p>
                     <ul>
@@ -179,14 +209,15 @@
                 launcherLink.textContent = 'View Wiangle Minecraft Launcher';
             } else {
                 description.innerHTML = `
-                    <p>Wiangle Minecraft Launcher是一款功能强大，用户友好的Minecraft启动器，为玩家提供最佳的游戏体验。</p>
-                    <p>Wiangle Minecraft Launcher 的主要特点有</p>
+                    <p>Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。</p>
+                    <p>我们的主要项目包括：</p>
                     <ul>
-                        <li>直观易用的界面设计，让您轻松管理游戏版本和模组</li>
-                        <li>支持多个Minecraft版本和模组加载器，满足不同玩家的需求</li>
-                        <li>内置模组管理系统，轻松安装、更新和管理您喜爱的模组</li>
-                        <li>提供游戏性能优化选项，让您的Minecraft运行更加流畅。</li>
+                        <li>Wiangle Minecraft Launcher - 功能强大的Minecraft启动器</li>
+                        <li>Minecraft模组开发</li>
+                        <li>Minecraft服务器插件开发</li>
+                        <li>各类Minecraft工具</li>
                     </ul>
+                    <p>我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。</p>
                     <p>此网站由Wiangle工作室开发</p>
                     <p>如要留言请联系Wiangle工作室的邮箱：</p>
                     <ul>
@@ -196,6 +227,23 @@
                 launcherLink.textContent = '查看Wiangle Minecraft Launcher';
             }
         }
+
+        window.addEventListener('load', function() {
+            const introAnimation = document.getElementById('introAnimation');
+            const introLogo = document.getElementById('introLogo');
+            
+            setTimeout(() => {
+                introLogo.classList.add('show');
+            }, 500);
+
+            setTimeout(() => {
+                introAnimation.style.opacity = '0';
+            }, 2500);
+
+            setTimeout(() => {
+                introAnimation.style.display = 'none';
+            }, 3500);
+        });
     </script>
 </body>
 </html>
