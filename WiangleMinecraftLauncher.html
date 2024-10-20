@@ -6,14 +6,14 @@
     <title>Wiangle Studio - Wiangle Minecraft Launcher</title>
     <style>
         :root {
-            --primary-color: #04007e;
-            --secondary-color: #2c3e50;
+            --primary-color: #3498db;
+            --secondary-color: #7f8c8d;
             --text-color: #333;
             --light-text-color: #ffffff;
             --background-overlay: rgba(0, 0, 0, 0.7);
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             margin: 0;
@@ -36,20 +36,22 @@
             flex-grow: 1;
         }
         header {
-            background-color: var(--light-text-color);
+            background-color: var(--primary-color);
             padding: 1rem;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .logo {
             width: 150px;
             height: auto;
+            filter: drop-shadow(0 0 10px var(--secondary-color));
         }
         .language-switch {
             text-align: right;
             margin-bottom: 20px;
         }
         .btn {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             color: var(--light-text-color);
             border: none;
             padding: 10px 15px;
@@ -58,17 +60,20 @@
             transition: background-color 0.3s;
         }
         .btn:hover {
-            background-color: #0600b3;
+            background-color: #6c7a7a;
         }
-        .content-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        h2 {
+            color: var(--primary-color);
+            margin: 0 0 20px 0;
         }
         .content {
-            position: relative;
-            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .content p {
+            margin-bottom: 1em;
         }
         ul {
             padding-left: 20px;
@@ -87,7 +92,7 @@
             transition: background-color 0.3s;
         }
         .link-btn:hover {
-            background-color: #0600b3;
+            background-color: #2980b9;
         }
         .fade-out {
             opacity: 0;
@@ -108,32 +113,19 @@
             <div class="language-switch">
                 <button class="btn" onclick="toggleLanguage()">切换语言 / Switch Language</button>
             </div>
-            <div class="content-container">
-                <div class="content">
-                    <div id="description">
-                        <p>Wiangle Minecraft Launcher是一款功能强大，用户友好的Minecraft启动器，为玩家提供最佳的游戏体验。</p>
-                        <p>Wiangle Minecraft Launcher 的主要特点有</p>
-                        <ul>
-                            <li>直观易用的界面设计，让您轻松管理游戏版本和模组</li>
-                            <li>支持多个Minecraft版本和模组加载器，满足不同玩家的需求</li>
-                            <li>内置模组管理系统，轻松安装、更新和管理您喜爱的模组</li>
-                            <li>提供游戏性能优化选项，让您的Minecraft运行更加流畅。</li>
-                        </ul>
-                        <p>此网站由Wiangle工作室开发</p>
-                        <p>如要留言请联系Wiangle工作室的邮箱：</p>
-                        <ul>
-                            <li>wiangle_studio@outlook.com</li>
-                        </ul>
-                    </div>
-                    <a href="Waingle Minecraft Launcher.txt" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
-                </div>
+            <div class="content">
+                <div id="description"></div>
+                <a href="Waingle Minecraft Launcher.txt" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
             </div>
         </div>
     </div>
 
     <script>
         let isEnglish = false;
+        let isTyping = false;
+
         function toggleLanguage() {
+            if (isTyping) return;
             const description = document.getElementById('description');
             const launcherLink = document.getElementById('launcher-link');
             
@@ -160,42 +152,70 @@
             const description = document.getElementById('description');
             const launcherLink = document.getElementById('launcher-link');
 
+            let content = [];
             if (isEnglish) {
-                description.innerHTML = `
-                    <p>Wiangle Minecraft Launcher is a powerful, user-friendly launcher for Minecraft, offering the best gaming experience for players.</p>
-                    <p>The main features of Wiangle Minecraft Launcher include:</p>
-                    <ul>
-                        <li>Intuitive interface design allows you to easily manage game versions and mods</li>
-                        <li>Supports multiple Minecraft versions and mod loaders to meet different player needs</li>
-                        <li>Built-in mod management system for easy installation, updates, and management of your favorite mods </li>
-                        <li>Provides game performance optimization options to make your Minecraft run more smoothly.</li>
-                    </ul>
-                    <p>This website is developed by Wiangle Studio</p>
-                    <p>For suggestions, please contact the email of Wiangle Studio:</p>
-                    <ul>
-                        <li>wiangle_studio@outlook.com</li>
-                    </ul>
-                `;
+                content = [
+                    "Wiangle Minecraft Launcher (WML)",
+                    "Wiangle Minecraft Launcher is a powerful, user-friendly launcher for Minecraft, offering the best gaming experience for players",
+                    "Our main projects include:",
+                    "• Intuitive interface design allows you to easily manage game versions and mods",
+                    "• Supports multiple Minecraft versions and mod loaders to meet different player needs",
+                    "• Built-in mod management system for easy installation, updates, and management of your favorite mods",
+                    "• Provides game performance optimization options to make your Minecraft run more smoothly",
+                    "This website is developed by Wiangle Studio",
+                    "For suggestions, please contact the email of Wiangle Studio:",
+                    "wiangle_studio@outlook.com"
+                ];
                 launcherLink.textContent = 'View Wiangle Minecraft Launcher';
             } else {
-                description.innerHTML = `
-                    <p>Wiangle Minecraft Launcher是一款功能强大，用户友好的Minecraft启动器，为玩家提供最佳的游戏体验。</p>
-                    <p>Wiangle Minecraft Launcher 的主要特点有</p>
-                    <ul>
-                        <li>直观易用的界面设计，让您轻松管理游戏版本和模组</li>
-                        <li>支持多个Minecraft版本和模组加载器，满足不同玩家的需求</li>
-                        <li>内置模组管理系统，轻松安装、更新和管理您喜爱的模组</li>
-                        <li>提供游戏性能优化选项，让您的Minecraft运行更加流畅。</li>
-                    </ul>
-                    <p>此网站由Wiangle工作室开发</p>
-                    <p>如要留言请联系Wiangle工作室的邮箱：</p>
-                    <ul>
-                        <li>wiangle_studio@outlook.com</li>
-                    </ul>
-                `;
+                content = [
+                    "Wiangle Minecraft Launcher (WML)",
+                    "Wiangle Minecraft Launcher是一款功能强大，用户友好的Minecraft启动器，为玩家提供最佳的游戏体验",
+                    "Wiangle Minecraft Launcher 的主要特点有：",
+                    "• 直观易用的界面设计，让您轻松管理游戏版本和模组",
+                    "• 支持多个Minecraft版本和模组加载器，满足不同玩家的需求",
+                    "• 内置模组管理系统，轻松安装、更新和管理您喜爱的模组",
+                    "• 提供游戏性能优化选项，让您的Minecraft运行更加流畅",
+                    "此网站由Wiangle工作室开发",
+                    "如要留言请联系Wiangle工作室的邮箱：",
+                    "wiangle_studio@outlook.com"
+                ];
                 launcherLink.textContent = '查看Wiangle Minecraft Launcher';
             }
+            
+            description.innerHTML = '';
+            typeWriter(content, description, 0, 0);
         }
+
+        function typeWriter(contentArray, element, paragraphIndex = 0, charIndex = 0) {
+            isTyping = true;
+            if (paragraphIndex < contentArray.length) {
+                if (charIndex === 0) {
+                    if (paragraphIndex === 0) {
+                        element.innerHTML += '<h2></h2>';
+                    } else {
+                        element.innerHTML += '<p></p>';
+                    }
+                }
+                
+                let currentParagraph = paragraphIndex === 0 ? element.lastElementChild : element.lastElementChild;
+                
+                if (charIndex < contentArray[paragraphIndex].length) {
+                    currentParagraph.innerHTML += contentArray[paragraphIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(() => typeWriter(contentArray, element, paragraphIndex, charIndex), 10);
+                } else {
+                    paragraphIndex++;
+                    setTimeout(() => typeWriter(contentArray, element, paragraphIndex, 0), 100);
+                }
+            } else {
+                isTyping = false;
+            }
+        }
+
+        window.addEventListener('load', function() {
+            updateContent();
+        });
     </script>
 </body>
 </html>
