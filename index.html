@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiangle Studio</title>
+    <title>Wiangle工作室</title>
     <style>
         :root {
-            --primary-color: #04007e;
-            --secondary-color: #2c3e50;
+            --primary-color: #3498db;
+            --secondary-color: #7f8c8d;
             --text-color: #333;
             --light-text-color: #ffffff;
             --background-overlay: rgba(0, 0, 0, 0.7);
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             margin: 0;
@@ -36,21 +36,22 @@
             flex-grow: 1;
         }
         header {
-            background-color: var(--light-text-color);
+            background-color: var(--primary-color);
             padding: 1rem;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .logo {
             width: 150px;
             height: auto;
-            filter: drop-shadow(0 0 10px var(--primary-color));
+            filter: drop-shadow(0 0 10px var(--secondary-color));
         }
         .language-switch {
             text-align: right;
             margin-bottom: 20px;
         }
         .btn {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             color: var(--light-text-color);
             border: none;
             padding: 10px 15px;
@@ -59,17 +60,20 @@
             transition: background-color 0.3s;
         }
         .btn:hover {
-            background-color: #0600b3;
+            background-color: #6c7a7a;
         }
         h2 {
-            color: var(--light-text-color);
+            color: var(--primary-color);
             margin: 0 0 20px 0;
         }
         .content {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .content p {
+            margin-bottom: 1em;
         }
         ul {
             padding-left: 20px;
@@ -88,7 +92,7 @@
             transition: background-color 0.3s;
         }
         .link-btn:hover {
-            background-color: #0600b3;
+            background-color: #2980b9;
         }
         .fade-out {
             opacity: 0;
@@ -138,22 +142,7 @@
                 <button class="btn" onclick="toggleLanguage()">切换语言 / Switch Language</button>
             </div>
             <div class="content">
-                <div id="description">
-                    <p>Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。</p>
-                    <p>我们的主要项目包括：</p>
-                    <ul>
-                        <li>Wiangle Minecraft Launcher - 功能强大的Minecraft启动器</li>
-                        <li>Minecraft模组开发</li>
-                        <li>Minecraft服务器插件开发</li>
-                        <li>各类Minecraft工具</li>
-                    </ul>
-                    <p>我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。</p>
-                    <p>此网站由Wiangle工作室开发</p>
-                    <p>如要留言请联系Wiangle工作室的邮箱：</p>
-                    <ul>
-                        <li>wiangle_studio@outlook.com</li>
-                    </ul>
-                </div>
+                <div id="description"></div>
                 <a href="WiangleMinecraftLauncher.html" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
             </div>
         </div>
@@ -161,8 +150,10 @@
 
     <script>
         let isEnglish = false;
+        let isTyping = false;
 
         function toggleLanguage() {
+            if (isTyping) return;
             const description = document.getElementById('description');
             const launcherLink = document.getElementById('launcher-link');
             
@@ -189,42 +180,66 @@
             const description = document.getElementById('description');
             const launcherLink = document.getElementById('launcher-link');
 
+            let content = [];
             if (isEnglish) {
-                description.innerHTML = `
-                    <p>Wiangle Studio is a passionate and creative software development team focused on providing high-quality gaming experiences for Minecraft players.</p>
-                    <p>Our main projects include:</p>
-                    <ul>
-                        <li>Wiangle Minecraft Launcher - A powerful Minecraft launcher</li>
-                        <li>Minecraft mod development</li>
-                        <li>Minecraft server plugin development</li>
-                        <li>Various Minecraft tools</li>
-                    </ul>
-                    <p>Our team consists of experienced developers, designers, and Minecraft enthusiasts dedicated to contributing to the Minecraft community.</p>
-                    <p>This website is developed by Wiangle Studio</p>
-                    <p>For suggestions, please contact the email of Wiangle Studio:</p>
-                    <ul>
-                        <li>wiangle_studio@outlook.com</li>
-                    </ul>
-                `;
+                content = [
+                    "Welcome to Wiangle Studio",
+                    "Wiangle Studio is a passionate and creative software development team focused on providing high-quality gaming experiences for Minecraft players.",
+                    "Our main projects include:",
+                    "• Wiangle Minecraft Launcher - A powerful Minecraft launcher",
+                    "• Minecraft mod development",
+                    "• Minecraft server plugin development",
+                    "• Various Minecraft tools",
+                    "Our team consists of experienced developers, designers, and Minecraft enthusiasts dedicated to contributing to the Minecraft community.",
+                    "This website is developed by Wiangle Studio",
+                    "For suggestions, please contact the email of Wiangle Studio:",
+                    "wiangle_studio@outlook.com"
+                ];
                 launcherLink.textContent = 'View Wiangle Minecraft Launcher';
             } else {
-                description.innerHTML = `
-                    <p>Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。</p>
-                    <p>我们的主要项目包括：</p>
-                    <ul>
-                        <li>Wiangle Minecraft Launcher - 功能强大的Minecraft启动器</li>
-                        <li>Minecraft模组开发</li>
-                        <li>Minecraft服务器插件开发</li>
-                        <li>各类Minecraft工具</li>
-                    </ul>
-                    <p>我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。</p>
-                    <p>此网站由Wiangle工作室开发</p>
-                    <p>如要留言请联系Wiangle工作室的邮箱：</p>
-                    <ul>
-                        <li>wiangle_studio@outlook.com</li>
-                    </ul>
-                `;
+                content = [
+                    "欢迎来到Wiangle工作室",
+                    "Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。",
+                    "我们的主要项目包括：",
+                    "• Wiangle Minecraft Launcher - 功能强大的Minecraft启动器",
+                    "• Minecraft模组开发",
+                    "• Minecraft服务器插件开发",
+                    "• 各类Minecraft工具",
+                    "我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。",
+                    "此网站由Wiangle工作室开发",
+                    "如要留言请联系Wiangle工作室的邮箱：",
+                    "wiangle_studio@outlook.com"
+                ];
                 launcherLink.textContent = '查看Wiangle Minecraft Launcher';
+            }
+            
+            description.innerHTML = '';
+            typeWriter(content, description, 0, 0);
+        }
+
+        function typeWriter(contentArray, element, paragraphIndex = 0, charIndex = 0) {
+            isTyping = true;
+            if (paragraphIndex < contentArray.length) {
+                if (charIndex === 0) {
+                    if (paragraphIndex === 0) {
+                        element.innerHTML += '<h2></h2>';
+                    } else {
+                        element.innerHTML += '<p></p>';
+                    }
+                }
+                
+                let currentParagraph = paragraphIndex === 0 ? element.lastElementChild : element.lastElementChild;
+                
+                if (charIndex < contentArray[paragraphIndex].length) {
+                    currentParagraph.innerHTML += contentArray[paragraphIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(() => typeWriter(contentArray, element, paragraphIndex, charIndex), 10);
+                } else {
+                    paragraphIndex++;
+                    setTimeout(() => typeWriter(contentArray, element, paragraphIndex, 0), 100);
+                }
+            } else {
+                isTyping = false;
             }
         }
 
@@ -242,6 +257,7 @@
 
             setTimeout(() => {
                 introAnimation.style.display = 'none';
+                updateContent();
             }, 3500);
         });
     </script>
