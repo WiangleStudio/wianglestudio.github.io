@@ -10,7 +10,6 @@
             --secondary-color: #7f8c8d;
             --text-color: #333;
             --light-text-color: #ffffff;
-            --background-overlay: rgba(0, 0, 0, 0.7);
         }
         body {
             font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
@@ -18,19 +17,14 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            background-image: url("background.jpg");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .overlay {
-            background-color: var(--background-overlay);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-size: 14px;
         }
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             flex-grow: 1;
@@ -39,12 +33,10 @@
             background-color: var(--primary-color);
             padding: 1rem;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .logo {
             width: 150px;
             height: auto;
-            filter: drop-shadow(0 0 10px var(--secondary-color));
         }
         .language-switch {
             text-align: right;
@@ -54,53 +46,64 @@
             background-color: var(--secondary-color);
             color: var(--light-text-color);
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 8px 16px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #6c7a7a;
+            font-size: 14px;
         }
         h2 {
             color: var(--primary-color);
-            margin: 0 0 20px 0;
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 20px;
         }
         .content {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 10px 0;
         }
         .content p {
-            margin-bottom: 1em;
+            font-size: 14px;
+            margin-bottom: 10px;
         }
         ul {
             padding-left: 20px;
+            margin-bottom: 10px;
         }
         li {
-            margin-bottom: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
         }
         .link-btn {
             display: inline-block;
             background-color: var(--primary-color);
             color: var(--light-text-color);
-            padding: 12px 24px;
+            padding: 10px 20px;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            transition: background-color 0.3s;
+            border-radius: 4px;
+            font-size: 14px;
         }
-        .link-btn:hover {
-            background-color: #2980b9;
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--light-text-color);
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
         }
-        .fade-out {
-            opacity: 0;
-            transition: opacity 0.5s ease-out;
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
         }
-        .fade-in {
-            opacity: 1;
-            transition: opacity 0.5s ease-in;
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: #000000;
+            margin-left: 2px;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+        }
+        .cursor.hidden {
+            display: none;
         }
         .intro-animation {
             position: fixed;
@@ -110,43 +113,47 @@
             height: 100%;
             background-color: var(--primary-color);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            transition: opacity 1s ease-out;
+            z-index: 9999;
+            color: #fff;
+            font-size: 24px;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+        .intro-animation.fade-out {
+            opacity: 0;
         }
         .intro-logo {
             width: 200px;
             height: auto;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: opacity 1s ease-in, transform 1s ease-in;
-        }
-        .intro-logo.show {
-            opacity: 1;
-            transform: scale(1);
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="intro-animation" id="introAnimation">
-        <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="intro-logo" id="introLogo">
+    <div id="introAnimation" class="intro-animation">
+        <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="intro-logo">
+        <div id="introText"></div>
     </div>
 
-    <div class="overlay">
-        <header>
-            <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="logo">
-        </header>
-        <div class="container">
-            <div class="language-switch">
-                <button class="btn" onclick="toggleLanguage()">切换语言 / Switch Language</button>
-            </div>
-            <div class="content">
-                <div id="description"></div>
-                <a href="WiangleMinecraftLauncher.html" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
-            </div>
+    <header>
+        <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="logo">
+    </header>
+    <div class="container">
+        <div class="language-switch">
+            <button class="btn" onclick="toggleLanguage()">切换语言 / Switch Language</button>
+        </div>
+        <div class="content">
+            <div id="description"></div>
+            <a href="WaingleMinecraftLauncher.html" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
         </div>
     </div>
+    <footer>
+        <p>如需留言，请联系：wiangle_studio@outlook.com ---- If you need to leave a message, please contact: wiangle_studio@outlook.com</p>
+        <p> Wiangle Studio  保留所有权利 ---- All rights reserved by Wiangle Studio</p>
+    </footer>
 
     <script>
         let isEnglish = false;
@@ -154,26 +161,8 @@
 
         function toggleLanguage() {
             if (isTyping) return;
-            const description = document.getElementById('description');
-            const launcherLink = document.getElementById('launcher-link');
-            
-            description.classList.add('fade-out');
-            launcherLink.classList.add('fade-out');
-            
-            setTimeout(() => {
-                isEnglish = !isEnglish;
-                updateContent();
-                
-                description.classList.remove('fade-out');
-                description.classList.add('fade-in');
-                launcherLink.classList.remove('fade-out');
-                launcherLink.classList.add('fade-in');
-                
-                setTimeout(() => {
-                    description.classList.remove('fade-in');
-                    launcherLink.classList.remove('fade-in');
-                }, 300);
-            }, 300);
+            isEnglish = !isEnglish;
+            updateContent();
         }
 
         function updateContent() {
@@ -186,14 +175,12 @@
                     "Welcome to Wiangle Studio",
                     "Wiangle Studio is a passionate and creative software development team focused on providing high-quality gaming experiences for Minecraft players.",
                     "Our main projects include:",
-                    "• Wiangle Minecraft Launcher - A powerful Minecraft launcher",
-                    "• Minecraft mod development",
-                    "• Minecraft server plugin development",
-                    "• Various Minecraft tools",
+                    " Wiangle Minecraft Launcher - A powerful Minecraft launcher",
+                    " Minecraft mod development",
+                    " Minecraft server plugin development",
+                    " Various Minecraft tools",
                     "Our team consists of experienced developers, designers, and Minecraft enthusiasts dedicated to contributing to the Minecraft community.",
-                    "This website is developed by Wiangle Studio",
-                    "For suggestions, please contact the email of Wiangle Studio:",
-                    "wiangle_studio@outlook.com"
+                    ""
                 ];
                 launcherLink.textContent = 'View Wiangle Minecraft Launcher';
             } else {
@@ -201,14 +188,12 @@
                     "欢迎来到Wiangle工作室",
                     "Wiangle工作室是一个充满激情和创造力的软件开发团队，专注于为Minecraft玩家提供优质的游戏体验。",
                     "我们的主要项目包括：",
-                    "• Wiangle Minecraft Launcher - 功能强大的Minecraft启动器",
-                    "• Minecraft模组开发",
-                    "• Minecraft服务器插件开发",
-                    "• 各类Minecraft工具",
+                    " Wiangle Minecraft Launcher - 功能强大的Minecraft启动器",
+                    " Minecraft模组开发",
+                    " Minecraft服务器插件开发",
+                    " 各类Minecraft工具",
                     "我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。",
-                    "此网站由Wiangle工作室开发",
-                    "如要留言请联系Wiangle工作室的邮箱：",
-                    "wiangle_studio@outlook.com"
+                    ""
                 ];
                 launcherLink.textContent = '查看Wiangle Minecraft Launcher';
             }
@@ -223,42 +208,66 @@
                 if (charIndex === 0) {
                     if (paragraphIndex === 0) {
                         element.innerHTML += '<h2></h2>';
+                    } else if (paragraphIndex === 2) {
+                        element.innerHTML += '<ul></ul>';
+                    } else if (paragraphIndex > 2 && paragraphIndex < contentArray.length - 1) {
+                        element.lastElementChild.innerHTML += '<li></li>';
                     } else {
                         element.innerHTML += '<p></p>';
                     }
+                    let currentElement = element.lastElementChild;
+                    if (paragraphIndex > 2 && paragraphIndex < contentArray.length - 1) {
+                        currentElement = element.lastElementChild.lastElementChild;
+                    }
+                    currentElement.innerHTML += '<span class="cursor"></span>';
                 }
                 
-                let currentParagraph = paragraphIndex === 0 ? element.lastElementChild : element.lastElementChild;
+                let currentElement = element.lastElementChild;
+                if (paragraphIndex > 2 && paragraphIndex < contentArray.length - 1) {
+                    currentElement = element.lastElementChild.lastElementChild;
+                }
                 
                 if (charIndex < contentArray[paragraphIndex].length) {
-                    currentParagraph.innerHTML += contentArray[paragraphIndex].charAt(charIndex);
+                    currentElement.insertBefore(document.createTextNode(contentArray[paragraphIndex].charAt(charIndex)), currentElement.lastElementChild);
                     charIndex++;
-                    setTimeout(() => typeWriter(contentArray, element, paragraphIndex, charIndex), 10);
+                    setTimeout(() => typeWriter(contentArray, element, paragraphIndex, charIndex), Math.random() * 30 + 20);
                 } else {
+                    currentElement.lastElementChild.classList.add('hidden');
                     paragraphIndex++;
-                    setTimeout(() => typeWriter(contentArray, element, paragraphIndex, 0), 100);
+                    setTimeout(() => typeWriter(contentArray, element, paragraphIndex, 0), 200);
                 }
             } else {
                 isTyping = false;
             }
         }
 
-        window.addEventListener('load', function() {
+        function playIntroAnimation() {
+            const introText = document.getElementById('introText');
             const introAnimation = document.getElementById('introAnimation');
-            const introLogo = document.getElementById('introLogo');
-            
-            setTimeout(() => {
-                introLogo.classList.add('show');
-            }, 500);
+            const text = "欢迎来到 Wiangle Studio";
+            let index = 0;
 
-            setTimeout(() => {
-                introAnimation.style.opacity = '0';
-            }, 2500);
+            function typeIntro() {
+                if (index < text.length) {
+                    introText.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(typeIntro, 100);
+                } else {
+                    setTimeout(() => {
+                        introAnimation.classList.add('fade-out');
+                        setTimeout(() => {
+                            introAnimation.style.display = 'none';
+                            updateContent();
+                        }, 1000);
+                    }, 1000);
+                }
+            }
 
-            setTimeout(() => {
-                introAnimation.style.display = 'none';
-                updateContent();
-            }, 3500);
+            setTimeout(typeIntro, 1000); 
+        }
+
+        window.addEventListener('load', () => {
+            playIntroAnimation();
         });
     </script>
 </body>
