@@ -25,31 +25,53 @@
         }
         .container {
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 80px auto 0;
             padding: 20px;
             flex-grow: 1;
         }
-        header {
+        .navbar {
             background-color: var(--primary-color);
-            padding: 1rem;
-            text-align: center;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
-        .logo {
-            width: 150px;
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-left .logo {
+            width: 100px;
             height: auto;
+            margin-right: 20px;
         }
-        .language-switch {
-            text-align: right;
-            margin-bottom: 20px;
+        .vertical-line {
+            width: 1px;
+            height: 24px;
+            background-color: #000000;
+            margin: 0 20px;
+        }
+        .navbar-buttons {
+            display: flex;
+            align-items: center;
         }
         .btn {
-            background-color: var(--secondary-color);
-            color: var(--light-text-color);
+            color: #000000; /* 修改为黑色 */
+            background: none;
             border: none;
             padding: 8px 16px;
-            border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        .btn:hover {
+            opacity: 0.8;
         }
         h2 {
             color: var(--primary-color);
@@ -71,15 +93,6 @@
         li {
             font-size: 14px;
             margin-bottom: 5px;
-        }
-        .link-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--light-text-color);
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
         }
         footer {
             background-color: var(--secondary-color);
@@ -105,51 +118,28 @@
         .cursor.hidden {
             display: none;
         }
-        .intro-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--primary-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            color: #fff;
-            font-size: 24px;
-            opacity: 1;
-            transition: opacity 1s ease-in-out;
-        }
-        .intro-animation.fade-out {
-            opacity: 0;
-        }
-        .intro-logo {
-            width: 200px;
-            height: auto;
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
-    <div id="introAnimation" class="intro-animation">
-        <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="intro-logo">
-        <div id="introText"></div>
-    </div>
-
-    <header>
-        <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="logo">
-    </header>
-    <div class="container">
-        <div class="language-switch">
-            <button class="btn" onclick="toggleLanguage()">切换语言 / Switch Language</button>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html">
+                <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="logo">
+            </a>
+            <div class="vertical-line"></div>
+            <a href="WiangleMinecraftLauncher.html" class="btn" id="launcher-link">Wiangle Minecraft Launcher</a>
         </div>
+        <div class="navbar-buttons">
+            <button class="btn" onclick="toggleLanguage()">中/A</button>
+        </div>
+    </nav>
+
+    <div class="container">
         <div class="content">
             <div id="description"></div>
-            <a href="WiangleMinecraftLauncher.html" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
         </div>
     </div>
+
     <footer>
         <p>如需留言，请联系：wiangle_studio@outlook.com ---- If you need to leave a message, please contact: wiangle_studio@outlook.com</p>
         <p> Wiangle Studio  保留所有权利 ---- All rights reserved by Wiangle Studio</p>
@@ -182,7 +172,7 @@
                     "Our team consists of experienced developers, designers, and Minecraft enthusiasts dedicated to contributing to the Minecraft community.",
                     ""
                 ];
-                launcherLink.textContent = 'View Wiangle Minecraft Launcher';
+                launcherLink.textContent = 'Wiangle Minecraft Launcher';
             } else {
                 content = [
                     "欢迎来到Wiangle工作室",
@@ -195,7 +185,7 @@
                     "我们的团队由经验丰富的开发者、设计师和Minecraft爱好者组成，致力于为Minecraft社区贡献我们的力量。",
                     ""
                 ];
-                launcherLink.textContent = '查看Wiangle Minecraft Launcher';
+                launcherLink.textContent = 'Wiangle Minecraft Launcher';
             }
             
             description.innerHTML = '';
@@ -241,33 +231,8 @@
             }
         }
 
-        function playIntroAnimation() {
-            const introText = document.getElementById('introText');
-            const introAnimation = document.getElementById('introAnimation');
-            const text = "欢迎来到 Wiangle Studio";
-            let index = 0;
-
-            function typeIntro() {
-                if (index < text.length) {
-                    introText.innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(typeIntro, 100);
-                } else {
-                    setTimeout(() => {
-                        introAnimation.classList.add('fade-out');
-                        setTimeout(() => {
-                            introAnimation.style.display = 'none';
-                            updateContent();
-                        }, 1000);
-                    }, 1000);
-                }
-            }
-
-            setTimeout(typeIntro, 1000); 
-        }
-
         window.addEventListener('load', () => {
-            playIntroAnimation();
+            updateContent();
         });
     </script>
 </body>
