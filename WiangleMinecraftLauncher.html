@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiangle Studio - Wiangle Minecraft Launcher</title>
+    <title>Wiangle Studio</title>
     <style>
         :root {
             --primary-color: #3498db;
@@ -25,31 +25,53 @@
         }
         .container {
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 80px auto 0;
             padding: 20px;
             flex-grow: 1;
         }
-        header {
+        .navbar {
             background-color: var(--primary-color);
-            padding: 1rem;
-            text-align: center;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
-        .logo {
-            width: 150px;
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-left .logo {
+            width: 100px;
             height: auto;
+            margin-right: 20px;
         }
-        .language-switch {
-            text-align: right;
-            margin-bottom: 20px;
+        .vertical-line {
+            width: 1px;
+            height: 24px;
+            background-color: #000000;
+            margin: 0 20px;
+        }
+        .navbar-buttons {
+            display: flex;
+            align-items: center;
         }
         .btn {
-            background-color: var(--secondary-color);
-            color: var(--light-text-color);
+            color: #000000; 
+            background: none;
             border: none;
             padding: 8px 16px;
-            border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        .btn:hover {
+            opacity: 0.8;
         }
         h2 {
             color: var(--primary-color);
@@ -71,15 +93,6 @@
         li {
             font-size: 14px;
             margin-bottom: 5px;
-        }
-        .link-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--light-text-color);
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
         }
         footer {
             background-color: var(--secondary-color);
@@ -108,18 +121,25 @@
     </style>
 </head>
 <body>
-    <header>
-        <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="logo">
-    </header>
-    <div class="container">
-        <div class="language-switch">
-            <button class="btn" onclick="toggleLanguage()">切换语言 / Switch Language</button>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html">
+                <img src="WiangleStudiologo.png" alt="Wiangle工作室 Logo" class="logo">
+            </a>
+            <div class="vertical-line"></div>
+            <a href="WiangleMinecraftLauncher.html" class="btn" id="launcher-link">Wiangle Minecraft Launcher</a>
         </div>
+        <div class="navbar-buttons">
+            <button class="btn" onclick="toggleLanguage()">中/A</button>
+        </div>
+    </nav>
+
+    <div class="container">
         <div class="content">
             <div id="description"></div>
-            <a href="Waingle Minecraft Launcher.txt" class="link-btn" id="launcher-link">查看Wiangle Minecraft Launcher</a>
         </div>
     </div>
+
     <footer>
         <p>如需留言，请联系：wiangle_studio@outlook.com ---- If you need to leave a message, please contact: wiangle_studio@outlook.com</p>
         <p> Wiangle Studio  保留所有权利 ---- All rights reserved by Wiangle Studio</p>
@@ -143,27 +163,27 @@
             if (isEnglish) {
                 content = [
                     "Wiangle Minecraft Launcher (WML)",
-                    "Wiangle Minecraft Launcher is a powerful, user-friendly launcher for Minecraft, offering the best gaming experience for players.",
-                    "Our main features include:",
+                    "Wiangle Minecraft Launcher (WML)is a powerful, user-friendly launcher for Minecraft, offering the best gaming experience for players",
+                    "Wiangle Minecraft Launcher (WML) main projects include:",
                     " Intuitive interface design",
                     " Support for multiple Minecraft versions and mod loaders",
                     " Built-in mod management system",
                     " Game performance optimization options",
                     ""
                 ];
-                launcherLink.textContent = 'View Wiangle Minecraft Launcher';
+                launcherLink.textContent = 'Wiangle Minecraft Launcher';
             } else {
                 content = [
                     "Wiangle Minecraft Launcher (WML)",
-                    "Wiangle Minecraft Launcher是一款功能强大，用户友好的Minecraft启动器，为玩家提供最佳的游戏体验。",
-                    "我们的主要特点包括：",
+                    "Wiangle Minecraft Launcher (WML) 是一款功能强大，用户友好的Minecraft启动器，为玩家提供最佳的游戏体验",
+                    "Wiangle Minecraft Launcher (WML) 的主要特点包括：",
                     " 直观易用的界面设计",
                     " 支持多个Minecraft版本和模组加载器",
                     " 内置模组管理系统",
                     " 游戏性能优化选项",
                     ""
                 ];
-                launcherLink.textContent = '查看Wiangle Minecraft Launcher';
+                launcherLink.textContent = 'Wiangle Minecraft Launcher';
             }
             
             description.innerHTML = '';
@@ -209,7 +229,9 @@
             }
         }
 
-        window.addEventListener('load', updateContent);
+        window.addEventListener('load', () => {
+            updateContent();
+        });
     </script>
 </body>
 </html>
