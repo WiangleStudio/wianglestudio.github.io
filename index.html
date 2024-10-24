@@ -219,11 +219,16 @@
     </footer>
     <script>
         let isEnglish = false;
+        let isUpdating = false; // 添加一个标志来跟踪更新状态
+    
         function toggleLanguage() {
+            if (isUpdating) return; // 如果正在更新，则不执行切换
             isEnglish = !isEnglish;
             updateContent();
         }
+    
         function updateContent() {
+            isUpdating = true; // 开始更新时设置标志
             const elements = {
                 description: document.getElementById('description'),
                 projectsTitle: document.getElementById('projects-title'),
@@ -284,14 +289,16 @@
                         typeWriter([currentContent.joinUs[1]], elements.joinUsText, 0, 0, resolve);
                     });
                 })
-            ]);
+            ]).then(() => {
+                isUpdating = false; // 更新完成后重置标志
+            });
             elements.launcherLink.textContent = 'Wiangle Minecraft Launcher';
         }
+    
         function typeWriter(contentArray, element, paragraphIndex = 0, charIndex = 0, callback) {
             if (paragraphIndex < contentArray.length) {
                 if (charIndex === 0) {
                     if (element.tagName === 'UL') {
-                        // 为项目列表创建卡片样式
                         element.innerHTML += '<li class="project-card"></li>';
                     } else if (paragraphIndex === 0 && element.id === 'description') {
                         element.innerHTML += '<h2></h2>';
@@ -320,6 +327,7 @@
                 if (callback) callback();
             }
         }
+    
         window.addEventListener('load', updateContent);
     </script>
 </body>
